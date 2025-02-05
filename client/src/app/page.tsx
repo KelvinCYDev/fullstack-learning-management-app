@@ -1,3 +1,13 @@
+import NonDashboasrdNavbar from "@/components/NonDashboardNavbar";
+import Landing from "@/app/(nondashboard)/landing/page";
+
 export default function Home() {
-  return <div>hi</div>;
+  return (
+    <div className="nondashboard-layout">
+      <NonDashboasrdNavbar />
+      <main className="nondashboard-layout__main">
+        <Landing />
+      </main>
+    </div>
+  );
 }
