@@ -248,11 +248,11 @@ input[type="color"] {
 }
 
 .landing__hero {
-  @apply flex justify-between items-center mt-12 h-[500px] rounded-lg bg-customgreys-secondarybg;
+  @apply flex flex-col-reverse sm:flex-row justify-between items-center mt-12 h-[500px] rounded-lg bg-customgreys-secondarybg;
 }
 
 .landing__hero-content {
-  @apply basis-1/2 px-16 mx-auto;
+  @apply basis-1/2 px-16 py-12 mx-auto;
 }
 
 .landing__title {
@@ -272,7 +272,7 @@ input[type="color"] {
 }
 
 .landing__hero-images {
-  @apply basis-1/2 h-full relative overflow-hidden rounded-r-lg;
+  @apply basis-1/2 h-full w-full relative overflow-hidden rounded-r-lg;
 }
 
 .landing__hero-image {
