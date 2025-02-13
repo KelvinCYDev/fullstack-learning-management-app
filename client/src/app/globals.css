@@ -219,7 +219,8 @@ input[type="color"] {
 
 /* Completion Page */
 .completion {
-  @apply flex flex-col h-full items-center justify-center bg-background text-foreground;
+  @apply flex flex-col h-full items-center justify-center;
+  /* bg-background text-foreground; */
 }
 
 .completion__content {
@@ -520,7 +521,7 @@ input[type="color"] {
 }
 
 .billing__table {
-  @apply text-customgreys-dirtyGrey min-h-[200px];
+  @apply text-customgreys-dirtyGrey;
 }
 
 .billing__table-header {
@@ -544,7 +545,7 @@ input[type="color"] {
 }
 
 .billing__table-body {
-  @apply bg-customgreys-primarybg min-h-[200px];
+  @apply bg-customgreys-primarybg;
 }
 
 /* User Courses Page */
