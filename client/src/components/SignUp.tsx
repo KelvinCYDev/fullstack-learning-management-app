@@ -12,12 +12,13 @@ const SignUpComponent = () => {
   const courseId = searchParams.get("id");
 
   const signInUrl = isCheckoutPage
-    ? `/checkout?step=1&id=${courseId}&showSignUp=false`
+    ? `/checkout?step=1&id=${courseId}&showSignUp=false` // In checkout detail if user wants to signed in
     : "/signin";
 
   const getRedirectUrl = () => {
     if (isCheckoutPage) {
-      return `/checkout?step=2&id=${courseId}&showSignUp=true`;
+      // In checkout detail when signed in or after signed up
+      return `/checkout?step=2&id=${courseId}`;
     }
 
     const userType = user?.publicMetadata?.userType as string;
