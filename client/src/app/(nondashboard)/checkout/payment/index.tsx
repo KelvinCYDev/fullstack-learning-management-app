@@ -48,7 +48,6 @@ const PaymentPageContent = () => {
         amount: course?.price || 0,
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       await createTransaction(transactionData), navigateToStep(3);
     }
   };
