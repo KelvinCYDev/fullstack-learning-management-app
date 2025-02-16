@@ -1,12 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BaseQueryApi, FetchArgs } from "@reduxjs/toolkit/query";
 import { User } from "@clerk/nextjs/server";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Clerk } from "@clerk/clerk-js";
 import { toast } from "sonner";
 
 const customBaseQuery = async (
   args: string | FetchArgs,
   api: BaseQueryApi,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   extraOptions: any
 ) => {
   const baseQuery = fetchBaseQuery({
@@ -21,6 +23,7 @@ const customBaseQuery = async (
   });
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result: any = await baseQuery(args, api, extraOptions);
 
     if (result.error) {
@@ -93,6 +96,41 @@ export const api = createApi({
       query: (id) => `courses/${id}`,
       providesTags: (result, error, id) => [{ type: "Courses", id }],
     }),
+
+    createCourse: build.mutation<
+      Course,
+      { teacherId: string; teacherName: string }
+    >({
+      query: (body) => ({
+        url: `courses`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Courses"],
+    }),
+
+    updateCourse: build.mutation<
+      Course,
+      { courseId: string; formData: FormData }
+    >({
+      query: ({ courseId, formData }) => ({
+        url: `courses/${courseId}`,
+        method: "PUT",
+        body: formData,
+      }),
+      invalidatesTags: (result, error, { courseId }) => [
+        { type: "Courses", id: courseId },
+      ],
+    }),
+
+    deleteCourse: build.mutation<{ message: string }, string>({
+      query: (courseId) => ({
+        url: `courses/${courseId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Courses"],
+    }),
+
     /* 
     ===============
     Stripe Transaction
@@ -101,6 +139,7 @@ export const api = createApi({
     getTransactions: build.query<Transaction[], string>({
       query: (userId) => `transactions?userId=${userId}`,
     }),
+
     createStripePaymentIntent: build.mutation<
       { clientSecret: string },
       { amount: number }
@@ -111,6 +150,7 @@ export const api = createApi({
         body: { amount },
       }),
     }),
+
     createTransaction: build.mutation<Transaction, Partial<Transaction>>({
       query: (transaction) => ({
         url: "transactions",
@@ -123,6 +163,9 @@ export const api = createApi({
 
 export const {
   useUpdateUserMutation,
+  useCreateCourseMutation,
+  useUpdateCourseMutation,
+  useDeleteCourseMutation,
   useGetCoursesQuery,
   useGetCourseQuery,
   useGetTransactionsQuery,
