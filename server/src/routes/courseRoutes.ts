@@ -3,6 +3,7 @@ import {
   createCourse,
   deleteCourse,
   getCourse,
+  getUploadVideoUrl,
   listCourses,
   updateCourse,
 } from "../controllers/courseController";
@@ -17,5 +18,11 @@ router.post("/", requireAuth(), createCourse);
 router.put("/:courseId", requireAuth(), upload.single("image"), updateCourse);
 router.get("/:courseId", getCourse);
 router.delete("/:courseId", requireAuth(), deleteCourse);
+
+router.post(
+  "/:courseId/sections/:sectionId/chapters/:chapterId/get-upload-url",
+  requireAuth(),
+  getUploadVideoUrl
+);
 
 export default router;

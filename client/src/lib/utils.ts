@@ -73,7 +73,7 @@ export const uploadAllVideos = async (
             courseId,
             updatedSections[i].sectionId,
             getUploadVideoUrl
-          );
+          ); //Get presigned url for upload instead of direct upload here
           updatedSections[i].chapters[j] = updatedChapter;
         } catch (error) {
           console.error(
@@ -105,6 +105,7 @@ async function uploadVideo(
       fileType: file.type,
     }).unwrap();
 
+    //Uploading with s3 url
     await fetch(uploadUrl, {
       method: "PUT",
       headers: {
